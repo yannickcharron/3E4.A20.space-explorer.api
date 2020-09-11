@@ -1,5 +1,7 @@
 import express from 'express';
 
+import planetsRoutes from './routes/planetsRoutes.js';
+
 const app = express();
 
 app.get('/premiere', (req, res, next) => {
@@ -23,12 +25,32 @@ app.get('/premiere', (req, res, next) => {
 
 });*/
 
-app.get('/:operation', (req, res, next) => {
+//#region Device
+
+/*app.get('/:operation', (req, res, next) => {
 
     const operation = req.params.operation;
     console.log(operation);
 
     let resultat = 0;
+
+    switch (operation) {
+        case 'somme':
+            result = a + b;
+            break;
+        case 'difference':
+            result = a - b;
+            break;
+        case 'produit':
+            result = a * b;
+            break;
+        case 'quotient':
+            result = a / b;
+            break;
+        case 'reste':
+            result = a % b;
+            break;
+    }
 
     //Operation = somme (+)
     //            difference (-)    
@@ -36,12 +58,16 @@ app.get('/:operation', (req, res, next) => {
     //            quotient (/)
     //            reste (%)
 
-    //TODO: switch sur operation ou plusieur if/else
-    
+    //TODO: switch sur operation ou plusieurs if/else
+
     res.status(200);
     res.set('Content-Type', 'text/plain');
     res.send(resultat.toString());
 
-});
+});*/
+
+//#endregion
+
+app.use('/', planetsRoutes);
 
 export default app;
