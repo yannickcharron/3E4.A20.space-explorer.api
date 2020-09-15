@@ -4,6 +4,8 @@ import planetsRoutes from './routes/planetsRoutes.js';
 
 const app = express();
 
+app.use(express.json());
+
 app.get('/premiere', (req, res, next) => {
     console.log('Ma première route');
     res.status(200); //Code HTTP 200 = OK
@@ -69,5 +71,10 @@ app.get('/premiere', (req, res, next) => {
 //#endregion
 
 app.use('/', planetsRoutes);
+
+//Route global pour la gestion des erreurs
+app.use((err, req, res, next) => {
+    res.status(err.statusCode).json(err);
+});
 
 export default app;

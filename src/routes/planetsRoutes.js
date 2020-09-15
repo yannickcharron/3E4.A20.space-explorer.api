@@ -1,5 +1,5 @@
 import express from 'express';
-
+import error from 'http-errors';
 
 const router = express.Router(); //Utilitaire d'express pour ajouter des routes
 
@@ -15,22 +15,51 @@ const planets = [{ id:1, name: 'Postraigantu' }, { id:2, name: 'Goceohiri' }, { 
 class PlanetsRoutes {
 
     constructor() {
-        router.get('/planets', this.getAll); //Ajoute un route à notre serveur
+        router.get('/planets', this.getAll); //Ajoute une route à notre serveur sur GET /planets
         router.get('/planets/:idPlanet', this.getOne); //localhost:5000/planets/600
+        router.post('/planets', this.post); //Ajoute une route à notre serveur sur POST /planets
+        
+    }
+
+    /**
+    *
+    * @param {express.Request} req
+    * @param {express.Response} res
+    * @param {express.NextFunction} next
+    */
+    post(req, res, next) {
+        //Ajouter une planète
+        
+        const newPlanet = req.body;
+
+        const index = planets.findIndex(p => p.id === newPlanet.id);
+        if(index === -1) {
+            planets.push(newPlanet);
+            res.status(201).json(newPlanet);
+        } else {
+            return next(error.Conflict(`Une planète avec l'identifiant ${newPlanet.id} existe déjà.`));
+        }
         
     }
 
     getOne(req, res, next) {
-        console.log('get one');
-        res.status(200);
-        res.end();
+        const idPlanet = req.params.idPlanet;
+        //Utilisation de la fonction find pour retrouver notre planète
+        //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
+        const planet = planets.find(p => p.id === parseInt(idPlanet, 10));
+        if(planet) {
+            res.status(200).json(planet); //Envoie de la réponse avec le status 200
+        } else {
+            //Retourner un code 404 - Not Found
+            return next(error.NotFound(`La planète avec l'identifiant ${idPlanet} n'existe pas.`));
+        }
     }
 
     getAll(req, res, next) {
         console.log('Obtenir toutes les planètes'); //Écrit dans le terminal
 
         res.status(200); // Code de status HTTP de notre réponse
-        //res.set('Content-Type', 'application/json'); Pour informer le client que nous envoyons du JSON
+        //res.set('Content-Type', 'application/json'); Pour informer le client que nous envoyons du JSON plus nécessaire avec .json()
 
         res.json(planets);
         
