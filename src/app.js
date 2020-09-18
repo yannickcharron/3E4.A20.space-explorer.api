@@ -70,7 +70,9 @@ app.get('/premiere', (req, res, next) => {
 
 //#endregion
 
-app.use('/', planetsRoutes);
+app.use('/planets', planetsRoutes);
+
+//TODO: Formatif 1
 
 //Route global pour la gestion des erreurs
 app.use((err, req, res, next) => {
