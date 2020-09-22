@@ -1,8 +1,12 @@
 import express from 'express';
 
+import database from './helpers/database.js';
+
 import planetsRoutes from './routes/planetsRoutes.js';
 
 const app = express();
+
+database(app);
 
 app.use(express.json());
 
