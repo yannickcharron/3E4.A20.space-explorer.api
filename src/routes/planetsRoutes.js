@@ -1,7 +1,7 @@
 import express from 'express';
 import error from 'http-errors';
 
-import Planet from '../models/planet.js';
+import planetsService from '../services/planetsService.js';
 
 const router = express.Router(); //Utilitaire d'express pour ajouter des routes
 
@@ -13,7 +13,7 @@ class PlanetsRoutes {
         router.post('/', this.post); //Ajoute une route à notre serveur sur POST /planets
         router.patch('/:idPlanet', this.patch); // Modification partielle d'un document
         router.delete('/:idPlanet', this.delete)  //Supprime un document 
-        router.put('/:idPlanet',this.put);// Modification complète d'un document
+        router.put('/:idPlanet', this.put);// Modification complète d'un document
 
     }
 
@@ -58,29 +58,71 @@ class PlanetsRoutes {
 
     }
 
-    getOne(req, res, next) {
+    async getOne(req, res, next) {
         const idPlanet = req.params.idPlanet;
-        //Utilisation de la fonction find pour retrouver notre planète
-        //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
-        const planet = planets.find(p => p.id === parseInt(idPlanet, 10));
-        if (planet) {
-            res.status(200).json(planet); //Envoie de la réponse avec le status 200
-        } else {
-            //Retourner un code 404 - Not Found
-            return next(error.NotFound(`La planète avec l'identifiant ${idPlanet} n'existe pas.`));
-        }
-    }
-
-    async getAll(req, res, next) {
-        console.log('Obtenir toutes les planètes'); //Écrit dans le terminal
 
         try {
-            const planets = await Planet.find();
-            res.status(200).json(planets);
+            //Trouver dans la base de données la planète avec idPlanet
+            let planet = await planetsService.retrieveById(idPlanet);
+
+            //La planète demandée n'existe pas
+            if(!planet) {
+                return next(error.NotFound(`La planète avec l'identifiant ${idPlanet} n'existe pas.`));
+            }
+
+            //Transformer la réponse
+            planet = planet.toObject({ getters: false, virtuals: false }); 
+            planet = planetsService.transform(planet);
+
+            //Envoyer une réponse
+            res.status(200).json(planet);
         } catch(err) {
+            console.log(err);
+            res.status(500).end();
+        }
+
+    }
+
+    async getAll(req, res, next) { 
+
+        //http://localhost:5000/planets?unit=c
+        //http://localhost:5000/planets?explorer=Karim
+
+        const criteria = {};
+        const transformOptions = {};
+
+        //Construction des critères de la requête à la base de données
+        if(req.query.explorer) {
+            criteria.discoveredBy = req.query.explorer;
+        }
+
+        //Construction des options de transformation
+        if (req.query.unit) {
+            const unit = req.query.unit;
+            if (unit === 'c') {
+                transformOptions.unit = unit;
+            } else {
+                return next(error.BadRequest('Le paramètre unit doit avoir la valeur c pour Celsius'));
+            }
+        }
+
+        //Possibilité de plusieurs conditions à valider pour la transformation
+
+        try {
+            let planets = await planetsService.retrieveByCriteria(criteria);
+
+            //Transformation de la réponse
+            planets = planets.map(p => {
+                p = p.toObject({ getters: false, virtuals: false }); 
+                p = planetsService.transform(p, transformOptions);
+                return p;
+            });
+
+            res.status(200).json(planets);
+        } catch (err) {
             return next(error.InternalServerError(err));
         }
-        
+
     }
 
 }
