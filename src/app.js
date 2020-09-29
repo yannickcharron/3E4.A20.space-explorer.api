@@ -1,6 +1,7 @@
 import express from 'express';
 
 import database from './helpers/database.js';
+import errors from './helpers/errors.js';
 
 import planetsRoutes from './routes/planetsRoutes.js';
 
@@ -21,8 +22,6 @@ app.use('/planets', planetsRoutes);
 //TODO: Formatif 1
 
 //Route global pour la gestion des erreurs
-app.use((err, req, res, next) => {
-    res.status(err.statusCode).json(err);
-});
+app.use('*', errors);
 
 export default app;

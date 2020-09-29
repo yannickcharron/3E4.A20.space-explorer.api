@@ -1,5 +1,6 @@
 import express from 'express';
 import error from 'http-errors';
+import _ from 'lodash';
 
 import planetsService from '../services/planetsService.js';
 
@@ -43,17 +44,30 @@ class PlanetsRoutes {
     * @param {express.Response} res
     * @param {express.NextFunction} next
     */
-    post(req, res, next) {
-        //Ajouter une planète
+    async post(req, res, next) {
+       
+        if(_.isEmpty(req.body)) {
+            return next(error.BadRequest()); //Erreur 400
+        }
 
-        const newPlanet = req.body;
+        try {
 
-        const index = planets.findIndex(p => p.id === newPlanet.id);
-        if (index === -1) {
-            planets.push(newPlanet);
-            res.status(201).json(newPlanet);
-        } else {
-            return next(error.Conflict(`Une planète avec l'identifiant ${newPlanet.id} existe déjà.`));
+            //1. Retrouver ce que le client veut ajouter
+            const newPlanet = req.body;
+
+            //2. Essayer de l'ajouter dans la base de données
+            let planet = await planetsService.create(newPlanet);
+
+            //3. Préparer la réponse(transformation) 
+            //Transformer la réponse
+            planet = planet.toObject({ getters: false, virtuals: false }); 
+            planet = planetsService.transform(planet);
+
+            //4. Envoyer une réponse
+            res.status(201).json(planet);
+
+        } catch(err) {
+            return next(err);
         }
 
     }
@@ -77,8 +91,7 @@ class PlanetsRoutes {
             //Envoyer une réponse
             res.status(200).json(planet);
         } catch(err) {
-            console.log(err);
-            res.status(500).end();
+            return next(err);
         }
 
     }
@@ -120,7 +133,7 @@ class PlanetsRoutes {
 
             res.status(200).json(planets);
         } catch (err) {
-            return next(error.InternalServerError(err));
+            return next(err);
         }
 
     }

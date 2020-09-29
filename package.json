@@ -20,8 +20,10 @@
   "homepage": "https://github.com/yannickcharron/3E4.A20.space-explorer.api#readme",
   "dependencies": {
     "chalk": "^4.1.0",
+    "dayjs": "^1.9.1",
     "express": "^4.17.1",
     "http-errors": "^1.8.0",
+    "lodash": "^4.17.20",
     "mongoose": "^5.10.6"
   }
 }
