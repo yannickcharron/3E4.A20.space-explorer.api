@@ -14,6 +14,14 @@ class PlanetsService {
         return Planet.create(planet);
     }
 
+    delete(idPlanet) {
+        return Planet.findByIdAndDelete(idPlanet);
+    }
+
+    update(idPLanet, planet) {
+        //return Planet.findByIdAndUpdate()
+    }
+
     retrieveByCriteria(criteria) {
 
         // Les critères sont ajoutés avec un ET

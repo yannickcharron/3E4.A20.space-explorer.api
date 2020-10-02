@@ -9,12 +9,14 @@ const planetSchema = mongoose.Schema({
     temperature: Number,
     satellites: [String],
     position: {
-        x: { type: Number, min: -1000, max: 1000 },
-        y: { type: Number, min: -1000, max: 1000 },
-        z: { type: Number, min: -1000, max: 1000 }
+        x: { type: Number, min: -1000, max: 1000, required:true },
+        y: { type: Number, min: -1000, max: 1000, required:true },
+        z: { type: Number, min: -1000, max: 1000, required:true },
+        
     }
 },{
-    collection:'planets'
+    collection:'planets',
+    strict:'throw'
 });
 
 export default mongoose.model('Planet', planetSchema);

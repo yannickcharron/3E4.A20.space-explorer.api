@@ -23,14 +23,23 @@ class PlanetsRoutes {
         return next(error.NotImplemented());
     }
 
-    delete(req, res, next) {
-        const index = planets.findIndex(p => p.id === parseInt(req.params.idPlanet));
-        if (index === -1) {
-            return next(error[404](`La planet avec l'identifiant ${req.params.idPlanet} n'existe pas.`));
-            //return next(error.NotFound(`La planet avec l'identifiant ${req.params.idPlanet} n'existe pas.`));
+    async delete(req, res, next) {
+        
+        try {
+            //1. Trouver si la planète existe
+            //2. Supprimer la planète
+            const deleteResult = await planetsService.delete(req.params.idPlanet);
+            if(deleteResult) {
+                //3.Envoyer une réponse
+                res.status(204).end(); //No Content
+            } else {
+               //La planète n'existe pas 
+               return next(error.NotFound(`La planète avec l'identifiant ${req.params.idPlanet} n'existe pas.`)); 
+            }
+    
+        } catch(err) {
+            return next(err);
         }
-        planets.splice(index, 1);
-        res.status(204).end();
 
     }
 
