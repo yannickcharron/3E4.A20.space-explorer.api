@@ -4,6 +4,7 @@ import database from './helpers/database.js';
 import errors from './helpers/errors.js';
 
 import planetsRoutes from './routes/planetsRoutes.js';
+import explorationsRoutes from './routes/explorationsRoutes.js';
 
 const app = express();
 
@@ -19,7 +20,7 @@ app.get('/premiere', (req, res, next) => {
 });
 
 app.use('/planets', planetsRoutes);
-//TODO: Formatif 1
+app.use('/explorations',explorationsRoutes);
 
 //Route global pour la gestion des erreurs
 app.use('*', errors);
