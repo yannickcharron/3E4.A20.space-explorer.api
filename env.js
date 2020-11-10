@@ -1,2 +1,2 @@
-import dotenv from 'dotenv-flow'
+import dotenv from 'dotenv-flow';
 dotenv.config({ silent: true });

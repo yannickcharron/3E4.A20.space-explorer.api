@@ -1,4 +1,4 @@
-import './env.js'
+import './env.js';
 import chalk from 'chalk';
 
 import app from './src/app.js';

@@ -57,12 +57,15 @@ class PlanetsService {
         //Coordonnées vitesse lumière
         // x en hex @ y en hex @ z en hex            
         planet.lightspeed = `${planet.position.x.toString(16)}¤${planet.position.y.toString(16)}¤${planet.position.z.toString(16)}`;
-        
+
         //const nombreEnEntier = parseInt("0x7AD", 16);
         //console.log(nombreEnEntier);
-        
 
+        //Linking générer un lien pour la ressource planète
+        planet.href = `${process.env.BASE_URL}/planets/${planet._id}`;
+        
         //Faire le ménage de la planète
+        delete planet._id;
         delete planet.__v;
 
         return planet;

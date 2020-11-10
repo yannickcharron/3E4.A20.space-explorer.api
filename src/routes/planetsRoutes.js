@@ -44,6 +44,9 @@ class PlanetsRoutes {
     }
 
     patch(req, res, next) {
+
+        //Permet une modification partiel d'une planète/ressource
+
         console.log(`patch - ${req.params.idPlanet}`);
         return next(error.NotImplemented());
     }
@@ -72,8 +75,14 @@ class PlanetsRoutes {
             planet = planet.toObject({ getters: false, virtuals: false }); 
             planet = planetsService.transform(planet);
 
+            
             //4. Envoyer une réponse
-            res.status(201).json(planet);
+            res.header('Location', planet.href);
+            if(req.query._body === 'false') {
+                res.status(201).end();
+            } else {
+                res.status(201).json(planet);
+            }
 
         } catch(err) {
             return next(err);
