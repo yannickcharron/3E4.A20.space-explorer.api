@@ -1,5 +1,5 @@
 import express from 'express';
-import error from 'http-errors';
+import httpError from 'http-errors';
 
 const router = express.Router(); 
 
@@ -22,4 +22,4 @@ class ExplorationsRoutes {
 
 new ExplorationsRoutes();
 
-export default router; //Permet d'utiliser le routeur à l'extérieur du fichier
+export default router;
