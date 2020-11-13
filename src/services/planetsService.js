@@ -18,12 +18,12 @@ class PlanetsService {
         return Planet.findByIdAndDelete(idPlanet);
     }
 
-    update(idPLanet, planet) {
-        //return Planet.findByIdAndUpdate()
+    update(idPlanet, planet) {
+        const filter = { _id: idPlanet }; //Équivalent de WHERE _id = idPlanet
+        return Planet.findOneAndUpdate(filter, planet, { new: true }); //new=true retourne l'objet après la mise à jour
     }
 
     retrieveByCriteria(criteria) {
-
         // Les critères sont ajoutés avec un ET
         /*const testCriteria = {
             discoveredBy: 'Skadex',
@@ -44,7 +44,6 @@ class PlanetsService {
     }
 
     transform(planet, transformOption = {}) {
-
         if (transformOption) {
             if (transformOption.unit === 'c') {
                 planet.temperature = this.convertToCelsius(planet.temperature); //Convertir en Celsius
@@ -55,7 +54,7 @@ class PlanetsService {
         planet.discoveryDate = dayjs(planet.discoveryDate).format('YYYY-MM-DD');
 
         //Coordonnées vitesse lumière
-        // x en hex @ y en hex @ z en hex            
+        // x en hex @ y en hex @ z en hex
         planet.lightspeed = `${planet.position.x.toString(16)}¤${planet.position.y.toString(16)}¤${planet.position.z.toString(16)}`;
 
         //const nombreEnEntier = parseInt("0x7AD", 16);
@@ -63,13 +62,12 @@ class PlanetsService {
 
         //Linking générer un lien pour la ressource planète
         planet.href = `${process.env.BASE_URL}/planets/${planet._id}`;
-        
+
         //Faire le ménage de la planète
         delete planet._id;
         delete planet.__v;
 
         return planet;
-
     }
 
     convertToCelsius(degreeKelvin) {

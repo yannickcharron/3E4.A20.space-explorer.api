@@ -1,8 +1,13 @@
 import express from 'express';
 import error from 'http-errors';
 import _ from 'lodash';
+import planet from '../models/planet.js';
 
 import planetsService from '../services/planetsService.js';
+import planetsRoutesValidators from '../validators/planetsRoutesValidators.js';
+
+import validator from '../helpers/validator.js';
+
 
 const router = express.Router(); //Utilitaire d'express pour ajouter des routes
 
@@ -14,13 +19,34 @@ class PlanetsRoutes {
         router.post('/', this.post); //Ajoute une route à notre serveur sur POST /planets
         router.patch('/:idPlanet', this.patch); // Modification partielle d'un document
         router.delete('/:idPlanet', this.delete)  //Supprime un document 
-        router.put('/:idPlanet', this.put);// Modification complète d'un document
+        router.put('/:idPlanet', planetsRoutesValidators.putValidator(), validator ,this.put);// Modification complète d'un document
 
     }
 
-    put(req, res, next) {
-        console.log(`put - ${req.params.idPlanet}`);
-        return next(error.NotImplemented());
+    async put(req, res, next) {
+        
+        //TODO: Validation
+        try {
+
+            //Trouver la planète et Faire la modification dans la base de données
+            let planetMod = await planetsService.update(req.params.idPlanet, req.body);
+
+            //La planète n'existe pas donc la mise ne peut pas de faire.
+            if(!planetMod) {
+                return next(error.NotFound(`La planète ${req.params.idPlanet} n'existe pas.`));
+            }
+
+            //Transformation de la réponse
+            planetMod = planetMod.toObject({ getters: false, virtuals: false }); 
+            planetMod = planetsService.transform(planetMod);
+
+            //Envoyer une réponse
+            res.status(200).json(planetMod);
+
+        } catch(err) {
+            return next(err);
+        }
+        
     }
 
     async delete(req, res, next) {
@@ -43,12 +69,34 @@ class PlanetsRoutes {
 
     }
 
-    patch(req, res, next) {
+    async patch(req, res, next) {
 
-        //Permet une modification partiel d'une planète/ressource
+        // Mise à jour complète d'une planète --> En SQL UPDATE
+        if(_.isEmpty(req.body)) {
+            return next(error.BadRequest()); //Erreur 400
+        }
 
-        console.log(`patch - ${req.params.idPlanet}`);
-        return next(error.NotImplemented());
+        //TODO: Validation
+        try {
+
+            //Trouver la planète et Faire la modification dans la base de données
+            let planetMod = await planetsService.update(req.params.idPlanet, req.body);
+
+            //La planète n'existe pas donc la mise ne peut pas de faire.
+            if(!planetMod) {
+                return next(error.NotFound(`La planète ${req.params.idPlanet} n'existe pas.`));
+            }
+
+            //Transformation de la réponse
+            planetMod = planetMod.toObject({ getters: false, virtuals: false }); 
+            planetMod = planetsService.transform(planetMod);
+
+            //Envoyer une réponse
+            res.status(200).json(planetMod);
+
+        } catch(err) {
+            return next(err);
+        }
     }
 
     /**
