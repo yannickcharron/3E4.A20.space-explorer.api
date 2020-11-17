@@ -1,0 +1,517 @@
+[{
+  "_id": {
+    "$oid": "5f1ef4071d2fd12580bf11ce"
+  },
+  "name": "Neon 5",
+  "discoveredBy": "Yiznik",
+  "discoveryDate": "2017-12-03",
+  "temperature": 280,
+  "satellites": [
+    "Funshaa"
+  ],
+  "position": {
+    "x": -601.0399968038633,
+    "y": -323.0355050920306,
+    "z": 689.5334013549557
+  }
+},{
+  "_id": {
+    "$oid": "5f1ef4071d2fd12580bf11cd"
+  },
+  "name": "Phillon HZZK",
+  "discoveredBy": "Skadex",
+  "discoveryDate": "2016-05-18",
+  "temperature": 266,
+  "satellites": [
+    "Hartronia",
+    "Gamma Ardoria"
+  ],
+  "position": {
+    "x": 725.1358464657378,
+    "y": 548.6048294839554,
+    "z": -164.95792869463867
+  }
+},{
+  "_id": {
+    "$oid": "5f1ef4071d2fd12580bf11cc"
+  },
+  "name": "Sigonides",
+  "discoveredBy": "Eyonix",
+  "discoveryDate": "2015-04-05",
+  "temperature": 297,
+  "satellites": [
+    "Caol X"
+  ],
+  "position": {
+    "x": -16.312769839483735,
+    "y": -55.99087554943628,
+    "z": 624.5902612039524
+  }
+},{
+  "_id": {
+    "$oid": "5f1ef4071d2fd12580bf11cb"
+  },
+  "name": "Cuilara",
+  "discoveredBy": "Yiznik",
+  "discoveryDate": "2013-11-03",
+  "temperature": 258,
+  "satellites": [],
+  "position": {
+    "x": 601.7266193402963,
+    "y": -924.3338705651713,
+    "z": -20.858847400126592
+  }
+},{
+  "_id": {
+    "$oid": "5f1ef4071d2fd12580bf11ca"
+  },
+  "name": "Soivis",
+  "discoveredBy": "Eyonix",
+  "discoveryDate": "2012-09-18",
+  "temperature": 288,
+  "satellites": [
+    "Antolok Ducan",
+    "Praankor",
+    "Svavin"
+  ],
+  "position": {
+    "x": -994.2800005152476,
+    "y": 239.50811743623944,
+    "z": -899.7180840938934
+  }
+},{
+  "_id": {
+    "$oid": "5f1ef4071d2fd12580bf11c9"
+  },
+  "name": "Thaepra",
+  "discoveredBy": "Skadex",
+  "discoveryDate": "2012-09-04",
+  "temperature": 259,
+  "satellites": [
+    "Kaanlos"
+  ],
+  "position": {
+    "x": -907.7854745373714,
+    "y": -709.9920437995298,
+    "z": 762.2001258640787
+  }
+},{
+  "_id": {
+    "$oid": "5f1ef4071d2fd12580bf11c8"
+  },
+  "name": "Mutrides",
+  "discoveredBy": "Eyonix",
+  "discoveryDate": "2011-06-11",
+  "temperature": 309,
+  "satellites": [
+    "Wimdania Waramis"
+  ],
+  "position": {
+    "x": 29.437488688213534,
+    "y": 74.49483903140572,
+    "z": -995.0723153971389
+  }
+},{
+  "_id": {
+    "$oid": "5f1ef4071d2fd12580bf11c7"
+  },
+  "name": "Chanruna",
+  "discoveredBy": "Skadex",
+  "discoveryDate": "2009-09-04",
+  "temperature": 299,
+  "satellites": [],
+  "position": {
+    "x": 26.53939241379203,
+    "y": 264.07360719477197,
+    "z": 571.9074976015745
+  }
+},{
+  "_id": {
+    "$oid": "5f1ef4071d2fd12580bf11c6"
+  },
+  "name": "Edionope",
+  "discoveredBy": "Eyonix",
+  "discoveryDate": "2020-02-11",
+  "temperature": 233,
+  "satellites": [
+    "Voptronia"
+  ],
+  "position": {
+    "x": 267.4371215082581,
+    "y": 354.13294211339985,
+    "z": 753.7598011357952
+  }
+},{
+  "_id": {
+    "$oid": "5f1ef4071d2fd12580bf11c5"
+  },
+  "name": "Kucruigawa",
+  "discoveredBy": "Eyonix",
+  "discoveryDate": "2020-01-07",
+  "temperature": 254,
+  "satellites": [],
+  "position": {
+    "x": 976.7737662665656,
+    "y": 874.7408011936257,
+    "z": -332.3050805471703
+  }
+},{
+  "_id": {
+    "$oid": "5f1ef4071d2fd12580bf11c4"
+  },
+  "name": "Phiuq SIV",
+  "discoveredBy": "Skadex",
+  "discoveryDate": "2019-09-20",
+  "temperature": 290,
+  "satellites": [
+    "Zengus",
+    "Tolfiner"
+  ],
+  "position": {
+    "x": 116.16706222412608,
+    "y": 953.5432319058093,
+    "z": 836.5369976972822
+  }
+},{
+  "_id": {
+    "$oid": "5f1ef4071d2fd12580bf11c3"
+  },
+  "name": "Zides BGG",
+  "discoveredBy": "Skadex",
+  "discoveryDate": "2018-10-29",
+  "temperature": 289,
+  "satellites": [
+    "Bies IX",
+    "Furvana",
+    "Sevva"
+  ],
+  "position": {
+    "x": 276.50140246863816,
+    "y": 690.6362242803527,
+    "z": -276.79177894743304
+  }
+},{
+  "_id": {
+    "$oid": "5f1ef4071d2fd12580bf11c2"
+  },
+  "name": "Stretelara",
+  "discoveredBy": "Skadex",
+  "discoveryDate": "2018-06-26",
+  "temperature": 295,
+  "satellites": [
+    "Svadaleko"
+  ],
+  "position": {
+    "x": 879.9404668699522,
+    "y": -709.0060418448134,
+    "z": 113.94205429090425
+  }
+},{
+  "_id": {
+    "$oid": "5f1ef4071d2fd12580bf11c1"
+  },
+  "name": "Becipra",
+  "discoveredBy": "Yiznik",
+  "discoveryDate": "2018-01-16",
+  "temperature": 300,
+  "satellites": [
+    "Tavtara Narum"
+  ],
+  "position": {
+    "x": -317.4971968790103,
+    "y": 538.4566650606844,
+    "z": -585.6674795003806
+  }
+},{
+  "_id": {
+    "$oid": "5f1ef4071d2fd12580bf11c0"
+  },
+  "name": "Nightandia",
+  "discoveredBy": "Skadex",
+  "discoveryDate": "2016-11-29",
+  "temperature": 278,
+  "satellites": [],
+  "position": {
+    "x": -866.0781669241945,
+    "y": 324.7393350948196,
+    "z": -617.7419549544773
+  }
+},{
+  "_id": {
+    "$oid": "5f1ef4071d2fd12580bf11bf"
+  },
+  "name": "Ninia",
+  "discoveredBy": "Yiznik",
+  "discoveryDate": "2016-11-10",
+  "temperature": 269,
+  "satellites": [
+    "Antarth"
+  ],
+  "position": {
+    "x": 226.7320413560783,
+    "y": -749.6559829408916,
+    "z": -985.1511880254035
+  }
+},{
+  "_id": {
+    "$oid": "5f1ef4071d2fd12580bf11be"
+  },
+  "name": "Inzinda",
+  "discoveredBy": "Yiznik",
+  "discoveryDate": "",
+  "temperature": 274,
+  "satellites": [
+    "Beangolia",
+    "Beix Mertan",
+    "Copertonia"
+  ],
+  "position": {
+    "x": -24.419317524380403,
+    "y": -382.4481369124147,
+    "z": 533.8374117830504
+  }
+},{
+  "_id": {
+    "$oid": "5f1ef4071d2fd12580bf11bd"
+  },
+  "name": "Ucarvis",
+  "discoveredBy": "Yiznik",
+  "discoveryDate": "2016-04-10",
+  "temperature": 263,
+  "satellites": [
+    "Duol Majestule",
+    "Obvas"
+  ],
+  "position": {
+    "x": -44.81174544271039,
+    "y": 226.01861114111534,
+    "z": -751.2912874546075
+  }
+},{
+  "_id": {
+    "$oid": "5f1ef4071d2fd12580bf11bc"
+  },
+  "name": "Gilveanides",
+  "discoveredBy": "Caëlix",
+  "discoveryDate": "2015-07-05",
+  "temperature": 236,
+  "satellites": [
+    "Treeprock"
+  ],
+  "position": {
+    "x": 855.3926316926475,
+    "y": 702.4051091700358,
+    "z": 705.0572266656202
+  }
+},{
+  "_id": {
+    "$oid": "5f1ef4071d2fd12580bf11bb"
+  },
+  "name": "Chelmaestea",
+  "discoveredBy": "Yiznik",
+  "discoveryDate": "2014-12-28",
+  "temperature": 239,
+  "satellites": [
+    "C’viz Suilus"
+  ],
+  "position": {
+    "x": 246.50430597642708,
+    "y": 94.30250947224226,
+    "z": -647.0548043717824
+  }
+},{
+  "_id": {
+    "$oid": "5f1ef4071d2fd12580bf11ba"
+  },
+  "name": "Pualia",
+  "discoveredBy": "Caëlix",
+  "discoveryDate": "2014-10-13",
+  "temperature": 249,
+  "satellites": [
+    "White Dunland"
+  ],
+  "position": {
+    "x": 489.27482197655604,
+    "y": 313.3123531802871,
+    "z": -63.57094888635913
+  }
+},{
+  "_id": {
+    "$oid": "5f1ef4071d2fd12580bf11b9"
+  },
+  "name": "Porornania",
+  "discoveredBy": "Yiznik",
+  "discoveryDate": "2014-09-17",
+  "temperature": 242,
+  "satellites": [
+    "Munnar Atarelerth"
+  ],
+  "position": {
+    "x": 57.30899855510188,
+    "y": -578.0435264377516,
+    "z": 372.79194121036494
+  }
+},{
+  "_id": {
+    "$oid": "5f1ef4071d2fd12580bf11b8"
+  },
+  "name": "Brion 8GW",
+  "discoveredBy": "Skadex",
+  "discoveryDate": "2014-03-19",
+  "temperature": 235,
+  "satellites": [
+    "Shanury",
+    "Hfall Duneko",
+    "Epsilon Amonopia"
+  ],
+  "position": {
+    "x": 936.7984961096713,
+    "y": -178.74827521310226,
+    "z": 107.90317218398127
+  }
+},{
+  "_id": {
+    "$oid": "5f1ef4071d2fd12580bf11b7"
+  },
+  "name": "Griuq 6ZML",
+  "discoveredBy": "Caëlix",
+  "discoveryDate": "2013-10-16",
+  "temperature": 285,
+  "satellites": [],
+  "position": {
+    "x": 536.1487690677459,
+    "y": -312.9230219184726,
+    "z": 362.6811325591357
+  }
+},{
+  "_id": {
+    "$oid": "5f1ef4071d2fd12580bf11b6"
+  },
+  "name": "Phapitis",
+  "discoveredBy": "Skadex",
+  "discoveryDate": "2011-06-01",
+  "temperature": 297,
+  "satellites": [
+    "Caaddon"
+  ],
+  "position": {
+    "x": 768.8495223713867,
+    "y": 717.6810692092902,
+    "z": -210.50237684669878
+  }
+},{
+  "_id": {
+    "$oid": "5f1ef4071d2fd12580bf11b5"
+  },
+  "name": "Verizuno",
+  "discoveredBy": "Caëlix",
+  "discoveryDate": "2011-04-30",
+  "temperature": 267,
+  "satellites": [
+    "Paumi",
+    "Mereran Urelius"
+  ],
+  "position": {
+    "x": -970.0639281439662,
+    "y": 632.9700315691271,
+    "z": -742.4396411544944
+  }
+},{
+  "_id": {
+    "$oid": "5f1ef4071d2fd12580bf11b4"
+  },
+  "name": "Kaomia",
+  "discoveredBy": "Eyonix",
+  "discoveryDate": "2011-01-21",
+  "temperature": 280,
+  "satellites": [
+    "Tau Ceti Ketreus"
+  ],
+  "position": {
+    "x": 107.29070816816329,
+    "y": 77.76948638101999,
+    "z": 551.9464258793539
+  }
+},{
+  "_id": {
+    "$oid": "5f1ef4071d2fd12580bf11b3"
+  },
+  "name": "Xatov",
+  "discoveredBy": "Caëlix",
+  "discoveryDate": "2010-12-11",
+  "temperature": 245,
+  "satellites": [
+    "Svaes",
+    "Kenurrinia",
+    "Taparth XII"
+  ],
+  "position": {
+    "x": -747.7988293025669,
+    "y": -500.43490543036626,
+    "z": 642.3363727179444
+  }
+},{
+  "_id": {
+    "$oid": "5f1ef4071d2fd12580bf11b2"
+  },
+  "name": "Hondarvis",
+  "discoveredBy": "Eyonix",
+  "discoveryDate": "2010-04-16",
+  "temperature": 283,
+  "satellites": [],
+  "position": {
+    "x": 479.04482716433245,
+    "y": 544.154721385461,
+    "z": -441.4862288660056
+  }
+},{
+  "_id": {
+    "$oid": "5f1ef4071d2fd12580bf11b1"
+  },
+  "name": "Pulreshan",
+  "discoveredBy": "Skadex",
+  "discoveryDate": "2010-02-01",
+  "temperature": 241,
+  "satellites": [
+    "Ianella"
+  ],
+  "position": {
+    "x": 726.0012199499995,
+    "y": 999.3656747699285,
+    "z": 322.6898458381079
+  }
+},{
+  "_id": {
+    "$oid": "5f1ef4071d2fd12580bf11b0"
+  },
+  "name": "Goceohiri",
+  "discoveredBy": "Skadex",
+  "discoveryDate": "2009-11-12",
+  "temperature": 255,
+  "satellites": [
+    "Nightnt"
+  ],
+  "position": {
+    "x": 631.104031404182,
+    "y": 427.1472613775711,
+    "z": 997.7589557304193
+  }
+},{
+  "_id": {
+    "$oid": "5f1ef4071d2fd12580bf11af"
+  },
+  "name": "Postraigantu",
+  "discoveredBy": "Caëlix",
+  "discoveryDate": "2009-08-03",
+  "temperature": 306,
+  "satellites": [
+    "Beta So'orkon 4",
+    "Epsilon Tamidian",
+    "Ceti Tavchin IV"
+  ],
+  "position": {
+    "x": 610.6954356404594,
+    "y": 434.94654492866766,
+    "z": -772.5987332357743
+  }
+}]

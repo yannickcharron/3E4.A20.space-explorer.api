@@ -12,7 +12,7 @@ const explorationSchema = mongoose.Schema({
         percent: Number, 
         id: false
     }],
-    commment: String
+    comment: String
 }, {
     collection: 'explorations', id:false
 });

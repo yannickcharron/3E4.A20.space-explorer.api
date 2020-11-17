@@ -51,7 +51,7 @@ class PlanetsService {
         }
 
         //Changer le format de la date de découverte
-        planet.discoveryDate = dayjs(planet.discoveryDate).format('YYYY-MM-DD');
+        //planet.discoveryDate = dayjs(planet.discoveryDate).format('YYYY-MM-DD');
 
         //Coordonnées vitesse lumière
         // x en hex @ y en hex @ z en hex
