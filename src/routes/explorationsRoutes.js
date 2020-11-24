@@ -14,6 +14,10 @@ class ExplorationsRoutes {
 
     async getAll(req, res, next) {
 
+        const options = {
+            isPlanetEmbed: false
+        }
+
         const retrieveOptions = {
             limit: req.query.limit,
             page: req.query.page,
@@ -23,11 +27,15 @@ class ExplorationsRoutes {
         //TODO: Est-ce que la planète doit être populée?
         //TODO:?embed=planet
 
+        if(req.query.embed === 'planet') {
+            options.isPlanetEmbed = true;
+        }
+
         //console.log(retrieveOptions);
 
         try {
             //Retrouver toutes les explorations
-            const [explorations, documentsCount] = await explorationsService.retrieveAll(retrieveOptions);
+            const [explorations, documentsCount] = await explorationsService.retrieveAll(retrieveOptions, options);
 
             const pageCount = Math.ceil(documentsCount / req.query.limit);
             const functionPages = paginate.getArrayPages(req); //Retourne une fonction
@@ -50,7 +58,7 @@ class ExplorationsRoutes {
             //1 ou plusieurs explorations à transformer?
             const transformExplorations = explorations.map(e => {
                 e = e.toObject({ getters: false, virtuals: false });
-                e = explorationsService.transform(e);
+                e = explorationsService.transform(e, options);
 
                 return e;
             });

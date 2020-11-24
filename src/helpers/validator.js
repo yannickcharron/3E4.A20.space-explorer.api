@@ -13,5 +13,12 @@ export default (req, res, next) => {
     const extractedErrors = [];
     errors.array().map(err => extractedErrors.push({ [err.param]: err.msg }));
 
-    return res.status(422).json({ errors: extractedErrors });
+    const error = {
+        status : 422,
+        developerMessage: extractedErrors,
+        userMessage: `Erreur de validation de données`,
+        moreInfo : `http://documentation/errors/${error.status}`
+    }
+
+    return res.status(422).json(error);
 }

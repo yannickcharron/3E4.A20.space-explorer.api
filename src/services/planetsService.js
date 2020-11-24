@@ -2,6 +2,8 @@ import dayjs from 'dayjs';
 
 import Planet from '../models/planet.js';
 
+import explorationsService from './explorationsService.js';
+
 const ZERO_KELVIN = -273.15;
 
 class PlanetsService {
@@ -39,15 +41,41 @@ class PlanetsService {
         //return Planet.find(testCriteria, 'temperature position');
     }
 
-    retrieveById(idPlanet) {
-        return Planet.findById(idPlanet);
+    retrieveById(idPlanet, options) {
+        const retrieveQuery = Planet.findById(idPlanet);
+
+        if (options.isExplorationsEmbed) {
+            //Si je veux embed les explorations
+            retrieveQuery.populate('explorations');
+        }
+
+        return retrieveQuery;
     }
 
-    transform(planet, transformOption = {}) {
+    transform(planet, transformOption = {}, options) {
         if (transformOption) {
             if (transformOption.unit === 'c') {
                 planet.temperature = this.convertToCelsius(planet.temperature); //Convertir en Celsius
             }
+        }
+
+        if (options.isExplorationsEmbed) {
+            //La planète peut contenir ses explorations
+
+            // const resultats = [];
+            // planet.explorations.forEach(e => {
+            //     e = explorationsService.transform(e, { isPlanetEmbed: false });
+            //     resultats.push(e);
+            // });
+            // planet.explorations = resultats;
+
+            planet.explorations = planet.explorations.map(e => {
+                e = explorationsService.transform(e, { isPlanetEmbed: false }); 
+                
+                //delete e.planet; Permet de supprimer l'information en double de la planète
+
+                return e;
+            });
         }
 
         //Changer le format de la date de découverte
@@ -65,6 +93,7 @@ class PlanetsService {
 
         //Faire le ménage de la planète
         delete planet._id;
+        //delete planet.id;
         delete planet.__v;
 
         return planet;

@@ -8,162 +8,149 @@ import planetsRoutesValidators from '../validators/planetsRoutesValidators.js';
 
 import validator from '../helpers/validator.js';
 
-
 const router = express.Router(); //Utilitaire d'express pour ajouter des routes
 
 class PlanetsRoutes {
-
     constructor() {
         router.get('/', this.getAll); //Ajoute une route à notre serveur sur GET /planets
         router.get('/:idPlanet', this.getOne); //localhost:5000/planets/600
         router.post('/', this.post); //Ajoute une route à notre serveur sur POST /planets
         router.patch('/:idPlanet', this.patch); // Modification partielle d'un document
-        router.delete('/:idPlanet', this.delete)  //Supprime un document 
-        router.put('/:idPlanet', planetsRoutesValidators.putValidator(), validator ,this.put);// Modification complète d'un document
-
+        router.delete('/:idPlanet', this.delete); //Supprime un document
+        router.put('/:idPlanet', planetsRoutesValidators.putValidator(), validator, this.put); // Modification complète d'un document
     }
 
     async put(req, res, next) {
-        
         //TODO: Validation
         try {
-
             //Trouver la planète et Faire la modification dans la base de données
             let planetMod = await planetsService.update(req.params.idPlanet, req.body);
 
             //La planète n'existe pas donc la mise ne peut pas de faire.
-            if(!planetMod) {
+            if (!planetMod) {
                 return next(error.NotFound(`La planète ${req.params.idPlanet} n'existe pas.`));
             }
 
             //Transformation de la réponse
-            planetMod = planetMod.toObject({ getters: false, virtuals: false }); 
+            planetMod = planetMod.toObject({ getters: false, virtuals: false });
             planetMod = planetsService.transform(planetMod);
 
             //Envoyer une réponse
             res.status(200).json(planetMod);
-
-        } catch(err) {
+        } catch (err) {
             return next(err);
         }
-        
     }
 
     async delete(req, res, next) {
-        
         try {
             //1. Trouver si la planète existe
             //2. Supprimer la planète
             const deleteResult = await planetsService.delete(req.params.idPlanet);
-            if(deleteResult) {
+            if (deleteResult) {
                 //3.Envoyer une réponse
                 res.status(204).end(); //No Content
             } else {
-               //La planète n'existe pas 
-               return next(error.NotFound(`La planète avec l'identifiant ${req.params.idPlanet} n'existe pas.`)); 
+                //La planète n'existe pas
+                return next(error.NotFound(`La planète avec l'identifiant ${req.params.idPlanet} n'existe pas.`));
             }
-    
-        } catch(err) {
+        } catch (err) {
             return next(err);
         }
-
     }
 
     async patch(req, res, next) {
-
         // Mise à jour complète d'une planète --> En SQL UPDATE
-        if(_.isEmpty(req.body)) {
+        if (_.isEmpty(req.body)) {
             return next(error.BadRequest()); //Erreur 400
         }
 
         //TODO: Validation
         try {
-
             //Trouver la planète et Faire la modification dans la base de données
             let planetMod = await planetsService.update(req.params.idPlanet, req.body);
 
             //La planète n'existe pas donc la mise ne peut pas de faire.
-            if(!planetMod) {
+            if (!planetMod) {
                 return next(error.NotFound(`La planète ${req.params.idPlanet} n'existe pas.`));
             }
 
             //Transformation de la réponse
-            planetMod = planetMod.toObject({ getters: false, virtuals: false }); 
+            planetMod = planetMod.toObject({ getters: false, virtuals: false });
             planetMod = planetsService.transform(planetMod);
 
             //Envoyer une réponse
             res.status(200).json(planetMod);
-
-        } catch(err) {
+        } catch (err) {
             return next(err);
         }
     }
 
     /**
-    * @param {express.Request} req
-    * @param {express.Response} res
-    * @param {express.NextFunction} next
-    */
+     * @param {express.Request} req
+     * @param {express.Response} res
+     * @param {express.NextFunction} next
+     */
     async post(req, res, next) {
-       
-        if(_.isEmpty(req.body)) {
+        if (_.isEmpty(req.body)) {
             return next(error.BadRequest()); //Erreur 400
         }
 
         try {
-
             //1. Retrouver ce que le client veut ajouter
             const newPlanet = req.body;
 
             //2. Essayer de l'ajouter dans la base de données
             let planet = await planetsService.create(newPlanet);
 
-            //3. Préparer la réponse(transformation) 
+            //3. Préparer la réponse(transformation)
             //Transformer la réponse
-            planet = planet.toObject({ getters: false, virtuals: false }); 
+            planet = planet.toObject({ getters: false, virtuals: false });
             planet = planetsService.transform(planet);
 
-            
             //4. Envoyer une réponse
             res.header('Location', planet.href);
-            if(req.query._body === 'false') {
+            if (req.query._body === 'false') {
                 res.status(201).end();
             } else {
                 res.status(201).json(planet);
             }
-
-        } catch(err) {
+        } catch (err) {
             return next(err);
         }
-
     }
 
     async getOne(req, res, next) {
+        const options = {
+            isExplorationsEmbed: false
+        };
         const idPlanet = req.params.idPlanet;
+
+        if (req.query.embed === 'explorations') {
+            options.isExplorationsEmbed = true;
+        }
 
         try {
             //Trouver dans la base de données la planète avec idPlanet
-            let planet = await planetsService.retrieveById(idPlanet);
+            let planet = await planetsService.retrieveById(idPlanet, options);
 
             //La planète demandée n'existe pas
-            if(!planet) {
+            if (!planet) {
                 return next(error.NotFound(`La planète avec l'identifiant ${idPlanet} n'existe pas.`));
             }
 
             //Transformer la réponse
-            planet = planet.toObject({ getters: false, virtuals: false }); 
-            planet = planetsService.transform(planet);
+            planet = planet.toObject({ virtuals: true });
+            planet = planetsService.transform(planet, {}, options);
 
             //Envoyer une réponse
             res.status(200).json(planet);
-        } catch(err) {
+        } catch (err) {
             return next(err);
         }
-
     }
 
-    async getAll(req, res, next) { 
-
+    async getAll(req, res, next) {
         //http://localhost:5000/planets?unit=c
         //http://localhost:5000/planets?explorer=Karim
 
@@ -171,7 +158,7 @@ class PlanetsRoutes {
         const transformOptions = {};
 
         //Construction des critères de la requête à la base de données
-        if(req.query.explorer) {
+        if (req.query.explorer) {
             criteria.discoveredBy = req.query.explorer;
         }
 
@@ -191,8 +178,8 @@ class PlanetsRoutes {
             let planets = await planetsService.retrieveByCriteria(criteria);
 
             //Transformation de la réponse
-            planets = planets.map(p => {
-                p = p.toObject({ getters: false, virtuals: false }); 
+            planets = planets.map((p) => {
+                p = p.toObject({ getters: false, virtuals: false });
                 p = planetsService.transform(p, transformOptions);
                 return p;
             });
@@ -201,9 +188,7 @@ class PlanetsRoutes {
         } catch (err) {
             return next(err);
         }
-
     }
-
 }
 
 new PlanetsRoutes();

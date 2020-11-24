@@ -1,13 +1,20 @@
 import Exploration from '../models/exploration.js';
 
+import planetsService from './planetsService.js';
+
 class ExplorationsService {
 
-    retrieveAll(retrieveOptions) {
+    retrieveAll(retrieveOptions, options) {
 
         const retrieveQuery = Exploration.find().limit(retrieveOptions.limit)
                                  .skip(retrieveOptions.skip)
-                                 .sort('-explorationDate')
-                                 .populate('planet'); //Équivalent de INNER JOIN
+                                 .sort('-explorationDate'); //- Décroissant
+                                
+
+        //isPlanetEmbed est vrai, on veut populer la planète
+        if(options.isPlanetEmbed) {
+            retrieveQuery.populate('planet');  //Équivalent de INNER JOIN
+        }
 
         const countQuery = Exploration.countDocuments();
 
@@ -15,10 +22,16 @@ class ExplorationsService {
 
     }
 
-    transform(exploration) {
+    transform(exploration, options) {
 
         //Transformation de la planète
-        //exploration.planet = { href: `${process.env.BASE_URL}/planets/${exploration.planet}`};
+        if(options.isPlanetEmbed) { //Planète complète dans la réponse
+            //exploration.planet un objet planet complet
+            exploration.planet = planetsService.transform(exploration.planet);
+        } else { //Seulement le href dans la réponse
+            //exploration.planet seulement un id
+            exploration.planet = { href: `${process.env.BASE_URL}/planets/${exploration.planet}`};
+        }
 
         //Transformation de l'exploration
         exploration.href = `${process.env.BASE_URL}/explorations/${exploration._id}`;
